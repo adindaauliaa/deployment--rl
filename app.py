@@ -1,13 +1,14 @@
 '''
 	Contoh Deloyment untuk Domain Reinforcement Learning (RL)
-	Orbit Future Academy - AI Mastery - KM Batch 3
+	Orbit Future Academy - AI Mastery - KM Batch 4
 	Tim Deployment
-	2022
+	2023
 '''
 
 # =[Modules dan Packages]========================
 
 from flask import Flask,render_template,request,jsonify
+from flask_ngrok import run_with_ngrok
 import numpy as np
 import gym
 import pickle
@@ -50,8 +51,7 @@ def apiReset():
 	
 	if request.method=='GET':
 		# Reset environment
-		env = gym.make("FrozenLake-v0", is_slippery=False, desc=peta)
-
+		env = gym.make("FrozenLake-v0",is_slippery=False, desc=peta)
 		env.reset()
 	
 		# Set nilai state menjadi nilai awal
@@ -204,8 +204,8 @@ if __name__ == '__main__':
 	Q_table_all = pickle.load(open('Q_table_Frozen_Lake.model', 'rb'))
 
 	# Run Flask di localhost 
-	app.run(host="localhost", port=5000, debug=True)
+	run_with_ngrok(app)
+	app.run()
 	
 	
-
 
